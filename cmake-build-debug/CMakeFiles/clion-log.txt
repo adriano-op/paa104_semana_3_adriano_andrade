@@ -1,0 +1,4 @@
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug
