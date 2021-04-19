@@ -435,3 +435,108 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b0f6c/fast && make[1]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make  -f CMakeFiles/cmTC_b0f6c.dir/build.make CMakeFiles/cmTC_b0f6c.dir/build
+make[2]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b0f6c.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_b0f6c.dir/CheckIncludeFile.c.o -c "/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c"
+Linking C executable cmTC_b0f6c
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0f6c.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_b0f6c.dir/CheckIncludeFile.c.o -o cmTC_b0f6c 
+make[2]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_02473/fast && make[1]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make  -f CMakeFiles/cmTC_02473.dir/build.make CMakeFiles/cmTC_02473.dir/build
+make[2]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_02473.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_02473.dir/CheckFunctionExists.c.o -c /home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/share/cmake-3.19/Modules/CheckFunctionExists.c
+Linking C executable cmTC_02473
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_02473.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_02473.dir/CheckFunctionExists.c.o -o cmTC_02473  -lpthread 
+make[2]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file experimental/filesystem exists passed with the following output:
+Change Dir: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a1ca0/fast && make[1]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make  -f CMakeFiles/cmTC_a1ca0.dir/build.make CMakeFiles/cmTC_a1ca0.dir/build
+make[2]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a1ca0.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++   -std=gnu++1z -o CMakeFiles/cmTC_a1ca0.dir/CheckIncludeFile.cxx.o -c "/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx"
+Linking CXX executable cmTC_a1ca0
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a1ca0.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_a1ca0.dir/CheckIncludeFile.cxx.o -o cmTC_a1ca0 
+make[2]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+
+Performing C++ SOURCE FILE Test CXX_FILESYSTEM_STDCPPFS_NEEDED succeeded with the following compile output:
+Change Dir: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8d126/fast && make[1]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make  -f CMakeFiles/cmTC_8d126.dir/build.make CMakeFiles/cmTC_8d126.dir/build
+make[2]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_8d126.dir/src.cxx.o
+/usr/bin/c++ -DCXX_FILESYSTEM_STDCPPFS_NEEDED  -std=gnu++1z -o CMakeFiles/cmTC_8d126.dir/src.cxx.o -c "/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx"
+Linking CXX executable cmTC_8d126
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8d126.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_8d126.dir/src.cxx.o -o cmTC_8d126  -lstdc++fs 
+make[2]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+...and run output:
+/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug
+Return value: 1
+Source file was:
+        #include <cstdlib>
+        #include <experimental/filesystem>
+
+        int main() {
+            auto cwd = std::experimental::filesystem::current_path();
+            printf("%s", cwd.c_str());
+            return EXIT_SUCCESS;
+        }
+    
+Determining if the __fbufsize exist passed with the following output:
+Change Dir: /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1c064/fast && make[1]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+/usr/bin/make  -f CMakeFiles/cmTC_1c064.dir/build.make CMakeFiles/cmTC_1c064.dir/build
+make[2]: Entering directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1c064.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_1c064.dir/CheckSymbolExists.c.o -c "/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
+Linking C executable cmTC_1c064
+/home/adriano/Downloads/CLion-2021.1/clion-2021.1/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1c064.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_1c064.dir/CheckSymbolExists.c.o -o cmTC_1c064 
+make[2]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+File /media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio_ext.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef __fbufsize
+  return ((int*)(&__fbufsize))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}

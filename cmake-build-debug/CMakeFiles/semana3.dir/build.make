@@ -98,6 +98,8 @@ semana3_EXTERNAL_OBJECTS =
 
 semana3: CMakeFiles/semana3.dir/main.cpp.o
 semana3: CMakeFiles/semana3.dir/build.make
+semana3: matplotplusplus/source/matplot/libmatplot.a
+semana3: matplotplusplus/source/3rd_party/libnodesoup.a
 semana3: CMakeFiles/semana3.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/media/adriano/DATA/Google Drive/Mestrado/UFOP/2020/PCC104/lista/semana3/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable semana3"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/semana3.dir/link.txt --verbose=$(VERBOSE)

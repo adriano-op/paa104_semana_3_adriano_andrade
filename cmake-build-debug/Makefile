@@ -142,6 +142,32 @@ semana3/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/semana3.dir/build.make CMakeFiles/semana3.dir/build
 .PHONY : semana3/fast
 
+#=============================================================================
+# Target rules for targets named nodesoup
+
+# Build rule for target.
+nodesoup: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 nodesoup
+.PHONY : nodesoup
+
+# fast build rule for target.
+nodesoup/fast:
+	$(MAKE) $(MAKESILENT) -f matplotplusplus/source/3rd_party/CMakeFiles/nodesoup.dir/build.make matplotplusplus/source/3rd_party/CMakeFiles/nodesoup.dir/build
+.PHONY : nodesoup/fast
+
+#=============================================================================
+# Target rules for targets named matplot
+
+# Build rule for target.
+matplot: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 matplot
+.PHONY : matplot
+
+# fast build rule for target.
+matplot/fast:
+	$(MAKE) $(MAKESILENT) -f matplotplusplus/source/matplot/CMakeFiles/matplot.dir/build.make matplotplusplus/source/matplot/CMakeFiles/matplot.dir/build
+.PHONY : matplot/fast
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -177,6 +203,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... matplot"
+	@echo "... nodesoup"
 	@echo "... semana3"
 	@echo "... main.o"
 	@echo "... main.i"
