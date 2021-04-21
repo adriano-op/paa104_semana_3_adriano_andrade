@@ -16,29 +16,7 @@ using namespace std;
 
 #include<map>
 
- class Coin {  // inner class
- private:
-    double weight;
-    int position;
 
- public:
-    Coin(double weight, int position){
-//        this.weight = weight;
-  //      this.position = position;
-    }
-
-//    double getWeight() {
-//        return weight;
-//    }
-//
-//    void setWeight(double weight){
-//        this.weight = weight;
-//    }
-//
-//    int getPosition(){
-//        return position;
-//    }
-};
 class BST {
 //https://gist.github.com/harish-r/a7df7ce576dda35c9660
     struct node {
@@ -504,12 +482,13 @@ std::vector<std::vector<int>> lexic_permute(int n) {
 // ------------------------------ johnTrotter ------------------------------------------------------------------------
 // ------------------------------ johnTrotter ------------------------------------------------------------------------
 
-//  O( n * n!)
+//  O( n!)
 std::vector<vector<int>> johnTrotter(std::vector<int> &array, bool *direcao, int k, std::vector<vector<int>> mv) {
     for (int i = 1; i < k; i++) {
         int n = array.size();
         int maiorMovel = 0;
         int pegaPosicaoMaiorMovel = 0;
+        std::vector<int> temp;
 
         //   encontrar o maior  inteiro móvel.
         for (int i = 0; i < n; i++) {
@@ -517,38 +496,40 @@ std::vector<vector<int>> johnTrotter(std::vector<int> &array, bool *direcao, int
             if (direcao[array[i] - 1] == false && i != 0) { //  n= 1 e 2
                 if ((array[i] > array[i - 1]) && (array[i] > maiorMovel)) {
                     maiorMovel = array[i];
+                    pegaPosicaoMaiorMovel = i + 1; //pega  posição do elemento, antes da mudança de maiorMovel
                 }
             }
 
-            // array direção 1 representa da ESQUERDA PARA A DIREITA.
+            // maiorMovel esquerda  para array direita
             if ((direcao[array[i] - 1] == true) && (i != n - 1)) {
                 if ((array[i] > array[i + 1]) && (array[i] > maiorMovel)) {
                     maiorMovel = array[i];
+                    pegaPosicaoMaiorMovel = i + 1;//pega  posição do elemento, antes da mudança de maiorMovel
                 }
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            if (array[i] == maiorMovel)
-                pegaPosicaoMaiorMovel = i + 1; //pega array posução do elemento, antes da mudança de maiorMovel
-        }
 
+        // swap k with the adjacent element k’s arrow points to
         // trocando os elementos de acordo com array direção, ou seja, direcao [].
         if (direcao[array[pegaPosicaoMaiorMovel - 1] - 1] == false) {
             swap(array[pegaPosicaoMaiorMovel - 1], array[pegaPosicaoMaiorMovel - 2]);
         } else if (direcao[array[pegaPosicaoMaiorMovel - 1] - 1] == true) {
             swap(array[pegaPosicaoMaiorMovel], array[pegaPosicaoMaiorMovel - 1]);
         }
+        //  reverse(array.begin(),array.end());
 
         // alterando as direções dos elementos maior que o maior número inteiro móvel.
         for (int i = 0; i < n; i++) {
             if (array[i] > maiorMovel) {
+                //reverse the direction of all the elements that are larger than
                 if (direcao[array[i] - 1] == true)
                     direcao[array[i] - 1] = false;
                 else if (direcao[array[i] - 1] == false)
                     direcao[array[i] - 1] = true;
             }
         }
+
 
         for (int i = 0; i < n; i++) {
             cout << array[i];
@@ -575,7 +556,7 @@ void inicializaJohn(int n) {
     std::vector<vector<int>> mv;
     bool direcao[n];
 
-    int k = factorial(n);
+    int k = factorial(n); // O(n!)
     cout << "Número de permutação: " << k << endl;
 
     for (int i = 0; i < n; i++) {
@@ -593,7 +574,7 @@ void inicializaJohn(int n) {
     johnTrotter(v, direcao, k, mv);
 }
 
-void fakeCoin(int A[], int i, int l){
+void fakeCoin(int A[], int i, int l) {
     //input n coins , create an array A[n-1]
 
 //divide n by 3 and compare left and mid sets.
@@ -727,8 +708,7 @@ Algorithm SUM(ARRAY,START,END)
 // Entrada: Um subarrayA [l..r] de arrayA [0..n − 1], definido por sua esquerda e direita
 // indices l and r (l≤r)
 // Saída: Partição de A [l..r] e a nova posição do pivô
-int lomutoPartition(int *arr, int l, int r)
-{
+int lomutoPartition(int *arr, int l, int r) {
     int pivot = arr[r], i = l;
     for (int j = l; j <= r - 1; j++) {
         if (arr[j] <= pivot) {
@@ -742,8 +722,7 @@ int lomutoPartition(int *arr, int l, int r)
 
 // melhor caso: teta - Θ(n)
 // pior   caso:  Θ(n^2)
-int quickSelect(int *arr, int l, int r, int k)
-{
+int quickSelect(int *arr, int l, int r, int k) {
     // If k is smaller than number of
     // elements in array
     if (k > 0 && k <= r - l + 1) {
@@ -771,81 +750,180 @@ int quickSelect(int *arr, int l, int r, int k)
     // elementos na matriz
     return INT_MAX;
 }
-// generates all subsets
-void generate(int k, vector<bool> & my_set, int N)
-{
-    if(k == N)
-    {
-        // shows the subset
-        cout << "{ ";
-        for(int i = 0; i < N; i++)
-        {
-            if(my_set[i] == true)
-                cout << i + 1 << " ";
+
+void print_subsets(const std::vector<std::vector<int>> &power_set) {
+    for (size_t i = 0; i < power_set.size(); i++) {
+        for (size_t j = 0; j < power_set[0].size(); j++) {
+            if (power_set[i][j] == 1) {
+                std::cout << "e" << power_set[0].size() - j << ", ";
+            }
         }
-        cout << "}\n";
+        std::cout << std::endl;
     }
-    else
-    {
-        my_set[k] = true;
-        generate(k + 1, my_set, N);
-        my_set[k] = false; // backtracking
-        generate(k + 1, my_set, N);
+
+}
+
+void print_bit_strings(std::vector<std::vector<int>> &power_set) {
+    for (size_t i = 0; i < power_set.size(); i++) {
+        for (size_t j = 0; j < power_set[0].size(); j++) {
+            std::cout << power_set[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+}
+
+/*
+ The correctness of the algorithm stems from the fact that it generates 2^n bit strings and all of them are distinct.
+ Both these assertions are easy to check by mathematical induction.
+ */
+std::vector<std::vector<int>> BRGC_Recursivo(int n) {
+    std::vector<std::vector<int>> power_set;
+    if (n == 1) {
+        power_set.push_back({0});
+        power_set.push_back({1});
+    } else {
+        std::vector<std::vector<int>> L1 = BRGC_Recursivo(n - 1);
+        std::vector<std::vector<int>> L2 = L1;
+        std::reverse(L2.begin(), L2.end());
+
+        for (std::vector<int> &str : L1) {
+            str.emplace(str.begin(), 0);
+        }
+
+        for (std::vector<int> &str : L2) {
+            str.emplace(str.begin(), 1);
+        }
+
+        L2.insert(L2.begin(), L1.begin(), L1.end());
+        power_set = L2;
+    }
+
+    return power_set;
+
+}
+
+//https://answerstreak.com/question-4-3-generate-all-the-subsets-of-a-four-elementset-a-a1-a2-a3-a4-by-algorithm-brgcn/
+std::vector<string> BRGC(int n) {
+    vector<string> ans;
+    ans.push_back("0");
+    ans.push_back("1");
+    vector<string> temp;
+    for (int i = 2; i <= n; ++i) {
+        for (auto x: ans) {
+            temp.push_back(x + "0");
+            temp.push_back(x + "1");
+        }
+        ans = temp;
+        temp.clear();
+    }
+    return ans;
+}
+
+void printsubset(int arr[], std::vector<string> &s) {
+
+    for (auto x:s) {
+        for (int j = 0; j < x.size(); ++j) {
+            if (x[j] == '1') {
+                cout << arr[j] << " ";
+            }
+            cout << "\n";
+        }
+
     }
 }
 
-int main() {
-    int N;
+ // compara o peso da balança e retorna o conunto mais leve.
+ // executado n/2
+int comparaMoeda(std::vector<int> left, std::vector<int> right) {
+    if (left.size() != right.size())
+        cout << "Balança com peso  diferente " << endl;
 
-    cin >> N;
+    int leftWeight = 0.0;
+    for (int aLeft : left)
+        leftWeight += aLeft;
 
-    vector<bool> my_set(N);
+    int rightWeight = 0.0;
+    for (int aRight : right)
+        rightWeight += aRight;
 
-    generate(0, my_set, N);
+    if (leftWeight == rightWeight) {
+        cout << "Balança com pesos iguais: " << leftWeight << endl;
+        return 0;
+    } else if (leftWeight < rightWeight) {
+        cout << "Peso balança esquerda menor: " << leftWeight << endl;
+        return 1;
+    } else if (leftWeight > rightWeight) {
+        cout << "Peso balança direita menor:  " << rightWeight << endl;
+        return -1;
+    }
 
-    //https://www.programmersought.com/article/88824602188/
+}
 
-
-//https://www.programmersought.com/article/91861512219/
-//    int n;
-//    cout << " Insira o tam de N" << endl;
-//    cin>>n;
-//    while(n--)
-//    {
-//        string s1,s2,s3;
-//        string s4,s5;
-//        int a[12]={0},i,j,k;
-//        for(j=0;j<3;j++)
-//        { cout << "  cin>>s1>>s2>>s3;" << endl;
-//            cin>>s1>>s2>>s3;
-//            if(s3=="even")
-//            {
-//                for(i=0;i<s1.size();i++)
-//                    a[s1[i]-'A']=1;
-//                for(i=0;i<s2.size();i++)
-//                    a[s2[i]-'A']=1;
-//            }
-//            else
-//            {
-//                s4=s1+s2;s5=s3;
-//            }
-//        }
-//        for(k=0;k<12;k++)
-//        {
-//            if(a[k]==0)
-//            {break;}
+// fake coin
+//    input size: n
 //
-//        }
-//        if(k<=12)
-//            if(s5=="up" && k>=4)
-//                printf("%c is the counterfeit coin and it is light.\n",k+'A');
-//            else if(s5=="up" && k<4)
-//                printf("%c is the counterfeit coin and it is heavy.\n",k+'A');
-//            else if(s5=="down" && k<4)
-//                printf("%c is the counterfeit coin and it is light.\n",k+'A');
-//            else if(s5=="down" && k>=4)
-//                printf("%c is the counterfeit coin and it is heavy.\n",k+'A');
-//    }
+//    Basic Operation: division
+//
+//    Efficiency : log base 2 of n in the worst case and log base 3 of n for the best efficiency
+//
+//    Best case: if n=2
+//
+//    Worst case:n= really large number
+int procuraMoeda(std::vector<int> &coins) {
+    if (coins.size() == 0) {
+        cout << "Balança vazia " << endl;
+        return -1;
+    } else if (coins.size() == 1) {
+        return 0;
+    } else {
+        int metade = floor(coins.size() / 2);
+        bool impar = coins.size() % 2 == 1;
+        std::vector<int> arrayEsquerda;
+        std::vector<int> moedaExtra;
+        std::vector<int> arrayDireita;
+
+        //  -----------------------// xxxxxxxxxxxxxxxxxxxxxxxx//
+        for (int i = 0; i < metade; i++) {
+            arrayEsquerda.push_back(coins[i]);
+        }
+        // xxxxxxxxxxxxxxxxxxxxxxxx//  -----------------------
+        for (int i = metade; i < metade * 2; i++) {
+            arrayDireita.push_back(coins[i]);
+        }
+        if (impar) {
+            for (int i = metade * 2; i < coins.size(); i++) {
+                moedaExtra.push_back(coins[i]);
+            }
+        }
+
+        int result = comparaMoeda(arrayEsquerda, arrayDireita);
+
+        if (result == 0) {
+            cout << "Procurando na moeda extra " << endl;
+            return 0;// procuraMoeda(moedaExtra);
+        } else if (result == 1) {
+            return procuraMoeda(arrayEsquerda);
+        } else if (result == -1) {
+            return procuraMoeda(arrayDireita);
+        }
+    }
+}
+
+std::vector<int> inicializaMoeda(int num) {
+    //inicializa as moedas, com o peso 2
+    vector<int> moeda;
+    for (int i = 0; i < num; i++) {
+        moeda.push_back(2);
+    }
+    //escolhe aleatoriamente uma moeda falsa, com o peso=1
+    int pos_fake = ceil(rand() % num);
+    moeda[pos_fake] = 1;
+    return moeda;
+}
+
+
+int main() {
     //  11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     //  --------------------------------------------------------------------------------------------------------------
     //  --------------------------------------------------------------------------------------------------------------
@@ -881,10 +959,11 @@ int main() {
     // -----------------------------------------------------------------------------------------------------------------
     // ----------------------------- Johnson-Trotter -------------------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
-    //222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-    //222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
-    // int n = 3;
+
+    //int n = 4;
     // inicializaJohn(n);
 
 
@@ -922,18 +1001,24 @@ int main() {
 
     //444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
     //444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+    // -------------------------------------------ALGORITHM BRGC(n)------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
 
-//    std::vector<string> str = {"A", "B", "C", "D"};
-//    int n = str.size();
-//    geraSubjconjunto(str, 0, n - 1);
+    //  std::vector<std::vector<int>> power_set = BRGC_Recursivo(2);
+
+//     print_bit_strings(power_set);
+
+    //  print_subsets(power_set);
 
 
 // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
 // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
 //----------------------------------------------------------------------------------------------------------------------
 //-----------------------------------------binarySearch-----------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 //
 /*
@@ -973,9 +1058,12 @@ int main() {
 //        cout << "Elemento " << x << " não encontrado no vector " << endl;
 //    }
 
-    //66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
-    //-----------------------------------------------------------------------------------------------------------------
-    //---------------------------------------------------- interpolation search --------------------------------------
+//6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+//6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+//----------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------- interpolation search --------------------------------------
+// --------------------------------------------------------- interpolation search --------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
 
 //    int n = 20;
 //    cout << "Tamanho do Vetor: " << n << endl;
@@ -994,7 +1082,7 @@ int main() {
 //    cout << endl;
 //
 //    cout << "Elemento procurado: " << x << endl;
-//    int pos = interpolation_search(str, x, );  //yO(logn (logn))
+//    int pos = interpolation_search(str, x );  //yO(logn (logn))
 //
 //
 //    if (pos != -1) {
@@ -1003,17 +1091,22 @@ int main() {
 //        cout << "Elemento " << x << " não encontrado no vector " << endl;
 //    }
 
-//77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
-// fake coin
-//    input size: n
+//7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+//7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+// --------------------------------------------------------- FakeCoin --------------------------------------------------
+// --------------------------------------------------------- FakeCoin --------------------------------------------------
+
 //
-//    Basic Operation: division
+//    vector<int> coins = inicializaMoeda(9);
+//    int fakeCoinPosition = procuraMoeda(coins);
 //
-//    Efficiency : log base 2 of n in the worst case and log base 3 of n for the best efficiency
-//
-//    Best case: if n=2
-//
-//    Worst case:n= really large number
+//    if (fakeCoinPosition == 0) {
+//        cout << "Moeda encontrada  " << endl;
+//    } else {
+//        cout << "Moeda não encontrada  " << endl;
+//    }
+
+
 
 
 //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -1021,13 +1114,13 @@ int main() {
 //-------------------------------------------- quickSelect -------------------------------------------------------------
 //-------------------------------------------- quickSelect -------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-    int arr[] = {4 , 1, 10, 8, 7, 12, 9, 2, 15 };
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int k = ceil(n/2);
-    cout << "K: " << k << endl;
-    cout << "K-th smallest element is "
-         << quickSelect(arr, 0, n - 1, k);
-
+//    int arr[] = {4 , 1, 10, 8, 7, 12, 9, 2, 15 };
+//    int n = sizeof(arr) / sizeof(arr[0]);
+//    int k = ceil(n/2);
+//    cout << "K: " << k << endl;
+//    cout << "K-th smallest element is "
+//         << quickSelect(arr, 0, n - 1, k);
+//
 
 
 
