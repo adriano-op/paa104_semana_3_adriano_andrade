@@ -574,136 +574,6 @@ void inicializaJohn(int n) {
     johnTrotter(v, direcao, k, mv);
 }
 
-void fakeCoin(int A[], int i, int l) {
-    //input n coins , create an array A[n-1]
-
-//divide n by 3 and compare left and mid sets.
-// If left set is equal to middle set then search the right set for the coin. Else search the set that weights the less.
-
-//left= weight of A[i….k-1], mid= weight of A[k…(n-1)-k], right= weight of A[(n-1)-k+1…n-1] i = 0, b= n-1 While i<= b k = floor((i+b)/3) if left==mid search right elseif left > mid search left else search mid return fake coin
-}
-
-//
-//int FCA(int A[], int i, int l) {
-//    int j = i;
-//    int B[l];
-//
-//    while (j != l) {
-//        B[j++] = j;  // Marking the coins with a number
-//    }
-//    if (i = l - 1) {
-//        if (A[i] == A[l]) { // Reducing the problem to two coins
-//            cout << "No Fake coin ";
-//            return 0;
-//        } else if (A[i] > A[l]) {
-//            cout << B[l] << " is the Fake coin";
-//            return B[l];
-//        } else {
-//            cout << B[i] << " is the Fake coin";
-//            return B[i];
-//        }
-//    } else{
-//
-//        if( ((l-i)/2 ) !=0) {  // Even number of coins
-//            if(SUM(A,i,[( l+i)/2)] >= SUM(A,[((l+i)/2)]+1,l){
-//                cout <<  "even  if there is no Fake coin";
-//                return  FCP(A,[((l+i)/2)+1],l);
-//            }
-//
-//        } else{
-//            return FCP(A,i,[(l+i)/2]);
-//        }
-//
-//    }
-//
-//
-//}
-
-
-/*
- Algorithm FCP (A,i,l)
-
-//Algorithm to find fake coin if present, otherwise give an appropriate message
-
-/*Input:- AArray representing the weight of the coins.
-
-i starting index of the array usually 1
-
-l last index of the array* /
-
-//Output:- The position of fake coin or appropriate message
-
-1. Set j=i and B[l]
-
-2. Repeat step 3 while j!=l
-
-3.             B[j++]=j  // Marking the coins with a number
-
-4. If(i=l-1) // Reducing the problem to two coins
-
-then:
-
-If(A[i]==A[l])
-
-print No Fake coin and return
-
-Else If (A[i]>A[l])// Else If (A[i]<A[l])
-
-print B[l] is the Fake coin and return
-
-Else
-
-        print B[i] is the Fake coin
-
-5. Else
-
-        If((l-i)/2%!=0) // Even number of coins
-
-then:
-
-If(SUM(A,i,[(l+i)/2)]>=SUM(A,[((l+i)/2)]+1,l)
-
-// If (SUM(A,i,(l+i)/2)<=SUM(A,(l+i/2)+1,l) , = is to ensure   the problem size reduces even if there is no fake coin
-
-retrun FCP(A,[((l+i)/2)+1],l) //  return FCP(A,i,[(l+i)/2])
-
-Else
-
-return FCP(A,i,[(l+i)/2])//  retrun FCP(A,[((l+i)/2)+1],l)
-
-Else               // Odd number of coins
-
-If(SUM(A,i,[(l+i-1)/2)]>SUM(A,[(l+i)/2],l-1)
-
-// If(SUM(A,i,[(l+i-1)/2)]<SUM(A, [(l+i)/2],l-1), Leaving the last element as l is odd
-
-return  FCP(a,[(l+i)/2],l)        // Restoring back the last element
-
-Else
-
-        A[(l+i)/2)]=A[(l)]// Bring the last element as the last element of the first half
-
-B[(l+i)/2)]=B[(l]// Retaining the coin’s number
-
-return FCP(A,i,(l+i)/2)
-
-Algorithm SUM(ARRAY,START,END)
-
-//Algorithm returns the sum of the elements of ARRAY from START index to END
-
-//Input:- Array with starting and ending index
-
-//Output:- Returns the sum of the elements between START and END
-
-1. Set j=START and sum=0
-
-2. Repeat step 3 while j!=END
-
-3.               sum+=A[j++]
-
-4. return sum
- */
-
 // Particiona o subarray pelo algoritmo de Lomuto usando o primeiro elemento como pivô
 // Entrada: Um subarrayA [l..r] de arrayA [0..n − 1], definido por sua esquerda e direita
 // indices l and r (l≤r)
@@ -803,7 +673,6 @@ std::vector<std::vector<int>> BRGC_Recursivo(int n) {
 
 }
 
-//https://answerstreak.com/question-4-3-generate-all-the-subsets-of-a-four-elementset-a-a1-a2-a3-a4-by-algorithm-brgcn/
 std::vector<string> BRGC(int n) {
     vector<string> ans;
     ans.push_back("0");
@@ -835,48 +704,52 @@ void printsubset(int arr[], std::vector<string> &s) {
 
  // compara o peso da balança e retorna o conunto mais leve.
  // executado n/2
-int comparaMoeda(std::vector<int> left, std::vector<int> right) {
-    if (left.size() != right.size())
+int pesaMoeda(std::vector<int> listaEsquerda, std::vector<int> listaDireita) {
+    if (listaEsquerda.size() != listaDireita.size())
         cout << "Balança com peso  diferente " << endl;
 
-    int leftWeight = 0.0;
-    for (int aLeft : left)
-        leftWeight += aLeft;
+    int pesoEsquerdo = 0.0;
+    for (int aLeft : listaEsquerda)
+        pesoEsquerdo += aLeft;
 
-    int rightWeight = 0.0;
-    for (int aRight : right)
-        rightWeight += aRight;
+    int pesoDireito = 0.0;
+    for (int aRight : listaDireita)
+        pesoDireito += aRight;
 
-    if (leftWeight == rightWeight) {
-        cout << "Balança com pesos iguais: " << leftWeight << endl;
+    if (pesoEsquerdo == pesoDireito) {
+        cout << "Balança com pesos iguais: " << pesoEsquerdo << endl;
         return 0;
-    } else if (leftWeight < rightWeight) {
-        cout << "Peso balança esquerda menor: " << leftWeight << endl;
+    } else if (pesoEsquerdo < pesoDireito) {
+        cout << "Peso balança esquerda menor: " << pesoEsquerdo << endl;
         return 1;
-    } else if (leftWeight > rightWeight) {
-        cout << "Peso balança direita menor:  " << rightWeight << endl;
+    } else if (pesoEsquerdo > pesoDireito) {
+        cout << "Peso balança direita menor:  " << pesoDireito << endl;
         return -1;
     }
 
 }
 
-// fake coin
-//    input size: n
+// moeda falsa
+// tamanho de entrada: n
 //
-//    Basic Operation: division
+// Operação básica: divisão
 //
-//    Efficiency : log base 2 of n in the worst case and log base 3 of n for the best efficiency
+// Eficiência: O(log2 n) de n no pior caso e base logarítmica 3 de n para a melhor eficiência
 //
-//    Best case: if n=2
+// Melhor caso: se n = 2
 //
-//    Worst case:n= really large number
+// Pior caso: n = número realmente grande
+// C(n) = (n/2) + 1 (numero de operação basica 'pesagem'   c(1)= 0
+// n= 3
+//C(n) = (n/3) + 3 (numero de operação basica 'pesagem'   c(1)= 0.  O(log3 n)
 int procuraMoeda(std::vector<int> &coins) {
     if (coins.size() == 0) {
         cout << "Balança vazia " << endl;
         return -1;
-    } else if (coins.size() == 1) {
+    } else if (coins.size() == 1) { // se possue uma moeda, ela é falsa
         return 0;
     } else {
+        //calcula o tamanhoh de cada pilha
         int metade = floor(coins.size() / 2);
         bool impar = coins.size() % 2 == 1;
         std::vector<int> arrayEsquerda;
@@ -896,8 +769,8 @@ int procuraMoeda(std::vector<int> &coins) {
                 moedaExtra.push_back(coins[i]);
             }
         }
-
-        int result = comparaMoeda(arrayEsquerda, arrayDireita);
+        //operação basica é numero de pesagem da moeda
+        int result = pesaMoeda(arrayEsquerda, arrayDireita);
 
         if (result == 0) {
             cout << "Procurando na moeda extra " << endl;
