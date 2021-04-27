@@ -17,8 +17,7 @@ using namespace std;
 #include<map>
 
 
-class BST {
-//https://gist.github.com/harish-r/a7df7ce576dda35c9660
+class binarySearhTree {
     struct node {
         int data;
         node *left;
@@ -27,12 +26,12 @@ class BST {
 
     node *root;
 
-    node *makeEmpty(node *t) {
+    node *raizVazia(node *t) {
         if (t == NULL)
             return NULL;
         {
-            makeEmpty(t->left);
-            makeEmpty(t->right);
+            raizVazia(t->left);
+            raizVazia(t->right);
             delete t;
         }
         return NULL;
@@ -121,12 +120,12 @@ A inserção começa com uma busca, procurando pelo valor, mas se não for encon
     }
 
 public:
-    BST() {
+    binarySearhTree() {
         root = NULL;
     }
 
-    ~BST() {
-        root = makeEmpty(root);
+    ~binarySearhTree() {
+        root = raizVazia(root);
     }
 
     void insert(int x) {
@@ -192,7 +191,9 @@ int binarySearch(std::vector<T> v, int K) {
     return -1;
 }
 
-
+// A classificação por inserção é uma aplicação direta da técnica de diminuir (em um) e conquistar ao problema de classificação.
+// É um algoritmo O (n²) nos piores casos e no médio, mas é cerca de duas vezes mais rápido em média do que no pior caso.
+// A vantagem notável do algoritmo é um bom desempenho em matrizes quase classificadas..
 template<class T>
 vector<T> insertSort(std::vector<T> &v) {
     vector<T> vetor(v.size());
@@ -200,7 +201,7 @@ vector<T> insertSort(std::vector<T> &v) {
     for (int i = 0; i < (int) vetor.size(); i++) {
         int v = vetor[i];
         int j = i - 1;
-        while (j >= 0 && vetor[j] > v) {
+        while (j >= 0 && vetor[j] > v) { // operação básica
             vetor[j + 1] = vetor[j];
             j = j - 1;
         }
@@ -1001,22 +1002,22 @@ int main() {
 // 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 // --------------------------------------- binary search tree ---------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
-
-//    BST t;
-//    t.insert(20);
-//    t.insert(25);
-//    t.insert(15);
-//    t.insert(10);
-//    t.insert(30);
-//    t.display();
-//    t.remove(20);
-//    t.display();
-//    t.remove(25);
-//    t.display();
-//    t.remove(30);
-//    t.display();
-//    t.search(30);
-//    t.display();
+//altura log2 n, pioraso O(n)
+    binarySearhTree t;
+    t.insert(20);
+    t.insert(25);
+    t.insert(15);
+    t.insert(10);
+    t.insert(30);
+    t.display();
+    t.remove(20);
+    t.display();
+    t.remove(25);
+    t.display();
+    t.remove(30);
+    t.display();
+    t.search(30);
+    t.display();
     return 0;
 
 }
