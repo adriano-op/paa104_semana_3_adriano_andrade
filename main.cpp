@@ -42,17 +42,17 @@ A inserção começa com uma busca, procurando pelo valor, mas se não for encon
  Eventualmente, alcança-se a folha, inserindo-se então o valor nesta posição. Ou seja, a raiz é examinada e introduz-se um nó novo na subárvore
  da esquerda se o valor novo for menor do que a raiz, ou na subárvore da direita se o valor novo for maior do que a raiz.
  */
-    node *insert(int x, node *t) {
-        if (t == NULL) // se a arvore é vazia
+    node *insert(int no, node *tree) {
+        if (tree == NULL) // se a arvore é vazia
         {
-            t = new node; // cria um nó e insere. se não
-            t->data = x;
-            t->left = t->right = NULL;
-        } else if (x < t->data) // faz as comparações
-            t->left = insert(x, t->left);
-        else if (x > t->data)
-            t->right = insert(x, t->right);
-        return t;
+            tree = new node; // cria um nó e insere. se não
+            tree->data = no;
+            tree->left = tree->right = NULL;
+        } else if (no < tree->data) // faz as comparações
+            tree->left = insert(no, tree->left);
+        else if (no > tree->data)
+            tree->right = insert(no, tree->right);
+        return tree;
     }
 
     node *findMin(node *t) {
@@ -64,38 +64,38 @@ A inserção começa com uma busca, procurando pelo valor, mas se não for encon
             return findMin(t->left);
     }
 
-    node *findMax(node *t) {
-        if (t == NULL)
+    node *findMax(node *tree) {
+        if (tree == NULL)
             return NULL;
-        else if (t->right == NULL)
-            return t;
+        else if (tree->right == NULL)
+            return tree;
         else
-            return findMax(t->right);
+            return findMax(tree->right);
     }
 
 //caso médio: O(log n)	 pior caso: O(n)
-    node *remove(int x, node *t) {
+    node *remove(int x, node *tree) {
         node *temp;
-        if (t == NULL)
+        if (tree == NULL)
             return NULL;
-        else if (x < t->data)
-            t->left = remove(x, t->left);
-        else if (x > t->data)
-            t->right = remove(x, t->right);
-        else if (t->left && t->right) {
-            temp = findMin(t->right);
-            t->data = temp->data;
-            t->right = remove(t->data, t->right);
+        else if (x < tree->data)
+            tree->left = remove(x, tree->left);
+        else if (x > tree->data)
+            tree->right = remove(x, tree->right);
+        else if (tree->left && tree->right) {
+            temp = findMin(tree->right);
+            tree->data = temp->data;
+            tree->right = remove(tree->data, tree->right);
         } else {
-            temp = t;
-            if (t->left == NULL)
-                t = t->right;
-            else if (t->right == NULL)
-                t = t->left;
+            temp = tree;
+            if (tree->left == NULL)
+                tree = tree->right;
+            else if (tree->right == NULL)
+                tree = tree->left;
             delete temp;
         }
 
-        return t;
+        return tree;
     }
 
     // imprime em ordem crescente
@@ -985,8 +985,8 @@ int main() {
 
 //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-//-------------------------------------------- quickSelect -------------------------------------------------------------
-//-------------------------------------------- quickSelect -------------------------------------------------------------
+//-------------------------------------------- mediana -----------------------------------------------------------------
+//-------------------------------------------- mediana -----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
 //    int arr[] = {4 , 1, 10, 8, 7, 12, 9, 2, 15 };
 //    int n = sizeof(arr) / sizeof(arr[0]);
