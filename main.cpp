@@ -26,6 +26,7 @@ class binarySearhTree {
 
     node *root;
 
+    // deleta a arvore
     node *raizVazia(node *t) {
         if (t == NULL)
             return NULL;
@@ -575,51 +576,46 @@ void inicializaJohn(int n) {
     johnTrotter(v, direcao, k, mv);
 }
 
+//O(n)
 // Particiona o subarray pelo algoritmo de Lomuto usando o primeiro elemento como pivô
 // Entrada: Um subarrayA [l..r] de arrayA [0..n − 1], definido por sua esquerda e direita
-// indices l and r (l≤r)
+// indices l e r (l ≤ r)
 // Saída: Partição de A [l..r] e a nova posição do pivô
-int lomutoPartition(int *arr, int l, int r) {
-    int pivot = arr[r], i = l;
-    for (int j = l; j <= r - 1; j++) {
-        if (arr[j] <= pivot) {
-            swap(arr[i], arr[j]);
+int lomutoPartition(int *array, int l, int r) {
+    int p = array[r], i = l;
+    for (int j = l; j <= r - 1; j++) {  // O(N)
+        if (array[j] <= p) {
+            swap(array[i], array[j]);
             i++;
         }
     }
-    swap(arr[i], arr[r]);
+    swap(array[i], array[r]);
     return i;
 }
 
-// melhor caso: teta - Θ(n)
+// melhor caso: teta - Θ(n) - se for para ordenar  + O(nlog n)
 // pior   caso:  Θ(n^2)
-int quickSelect(int *arr, int l, int r, int k) {
-    // If k is smaller than number of
-    // elements in array
-    if (k > 0 && k <= r - l + 1) {
+//pior caso : só acontece se estiver ordenado de forma decrescente
+int quickSelect(int *array, int l, int r, int k) {
+    // Se k for menor que o número de elementos na array
 
         // Particionar o array em torno do último
-        // elemento e obtém a posição do pivô
-        // elemento na matriz classificada
-        int index = lomutoPartition(arr, l, r);
+        // elemento e obter a posição do pivô
+        // elemento na array classificada
+        int index = lomutoPartition(array, l, r);
 
-        // Se a posição for igual a k
+        // Se a posição for igual a k, retorna o elemento
         if (index - l == k - 1)
-            return arr[index];
+            return array[index];
 
         // Se a posição for maior, volte a ocorrer
         // para subarray esquerdo
         if (index - l > k - 1)
-            return quickSelect(arr, l, index - 1, k);
+            return quickSelect(array, l, index - 1, k);
 
         // Caso contrário, recorre para o subarray direito
-        return quickSelect(arr, index + 1, r,
+        return quickSelect(array, index + 1, r,
                            k - index + l - 1);
-    }
-
-    // Se k for maior  do que um número de
-    // elementos na matriz
-    return INT_MAX;
 }
 
 void print_subsets(const std::vector<std::vector<int>> &power_set) {
@@ -703,8 +699,92 @@ void printsubset(int arr[], std::vector<string> &s) {
     }
 }
 
- // compara o peso da balança e retorna o conunto mais leve.
- // executado n/2
+int fake_coin_detector2(const std::vector<int> &coins, int begin, int end) {
+
+    int fake_coin = -1;
+
+    if ((end - begin) == 1) {
+        return begin;
+    } else {
+        int pile_size = (end - begin) / 2;
+        int remainder = (end - begin) % 2;
+
+        // Divide the coins in two piles
+
+        int begin_p2 = begin + pile_size;
+
+        if (remainder != 0) {
+            end = end - 1;
+        }
+
+        int weight_p1 = std::accumulate(coins.begin() + begin, coins.begin() + begin_p2, 0);
+        int weight_p2 = std::accumulate(coins.begin() + begin_p2, coins.begin() + end, 0);
+
+
+        if (weight_p1 < weight_p2) {// If the weight the same
+            fake_coin = fake_coin_detector2(coins, begin, begin_p2);// Discard both and continue with the third
+        }//else continue with the lighter of the two
+        else if (weight_p1 > weight_p2) {//else
+            fake_coin = fake_coin_detector2(coins, begin_p2, end);
+        } else {
+            fake_coin = end;
+        }
+
+    }
+
+    return fake_coin;
+}
+
+int fake_coin_detector(const std::vector<int> &coins, int begin, int end) {
+
+    int fake_coin = -1;
+
+    if ((end - begin) == 1) {
+        return begin;
+    } else if ((end - begin) == 2) {
+        return (coins[begin] < coins[begin + 1]) ? begin : begin + 1;
+    } else {
+        int pile_size = (end - begin) / 3;
+        int remainder = (end - begin) % 3;
+
+        // Divide the coins in three piles
+
+        // Weight the first two piles
+
+        int begin_p1;
+        int begin_p2;
+        int begin_p3;
+
+        if (remainder == 0) {
+            begin_p1 = begin;
+            begin_p2 = begin + pile_size;
+            begin_p3 = begin + 2 * pile_size;
+        } else {
+            begin_p1 = begin;
+            begin_p2 = begin + pile_size + 1;
+            begin_p3 = begin + 2 * pile_size + 2;
+        }
+
+        int weight_p1 = std::accumulate(coins.begin() + begin_p1, coins.begin() + begin_p2, 0);
+        int weight_p2 = std::accumulate(coins.begin() + begin_p2, coins.begin() + begin_p3, 0);
+
+
+        if (weight_p1 == weight_p2) {// If the weight the same
+            fake_coin = fake_coin_detector(coins, begin_p3, end);// Discard both and continue with the third
+        }//else continue with the lighter of the two
+        else if (weight_p1 < weight_p2) {//else
+            fake_coin = fake_coin_detector(coins, begin_p1, begin_p2);
+        } else {//weight_p2 < weight_p1
+            fake_coin = fake_coin_detector(coins, begin_p2, begin_p3);
+        }
+
+    }
+
+    return fake_coin;
+}
+
+// compara o peso da balança e retorna o conunto mais leve.
+// executado n/2
 int pesaMoeda(std::vector<int> listaEsquerda, std::vector<int> listaDireita) {
     if (listaEsquerda.size() != listaDireita.size())
         cout << "Balança com peso  diferente " << endl;
@@ -982,19 +1062,27 @@ int main() {
 
 
 
+//    versão do professor
+//    int fake1 = fake_coin_detector(coins, 0, coins.size());
+//    std::cout << "Fake 1" << " " << fake1 << std::endl;
+//
+//    int fake2 = fake_coin_detector2(coins, 0, coins.size());
+//    std::cout << "Fake 2" << " " << fake2 << std::endl;
+
+
 
 //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 //8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 //-------------------------------------------- mediana -----------------------------------------------------------------
 //-------------------------------------------- mediana -----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-//    int arr[] = {4 , 1, 10, 8, 7, 12, 9, 2, 15 };
-//    int n = sizeof(arr) / sizeof(arr[0]);
-//    int k = ceil(n/2);
-//    cout << "K: " << k << endl;
-//    cout << "K-th smallest element is "
-//         << quickSelect(arr, 0, n - 1, k);
-//
+    int array[] = {4, 1, 10, 8, 7, 12, 9, 2, 15};
+    int n = sizeof(array) / sizeof(array[0]);
+    int k = ceil(n / 2);
+    cout << "K: " << k << endl;
+    cout << "K-th elemento:  "
+         << quickSelect(array, 0, n - 1, k);
+
 
 
 
@@ -1003,21 +1091,25 @@ int main() {
 // --------------------------------------- binary search tree ---------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
 //altura log2 n, pioraso O(n)
-    binarySearhTree t;
-    t.insert(20);
-    t.insert(25);
-    t.insert(15);
-    t.insert(10);
-    t.insert(30);
-    t.display();
-    t.remove(20);
-    t.display();
-    t.remove(25);
-    t.display();
-    t.remove(30);
-    t.display();
-    t.search(30);
-    t.display();
+//    binarySearhTree t;
+//    t.insert(20);
+//    t.insert(25);
+//    t.insert(24);
+//    t.insert(27);
+//    t.insert(29);
+//    t.insert(15);
+//    t.insert(10);
+//    t.insert(11);
+//    t.insert(30);
+//    t.display();
+//    t.remove(20);
+//    t.display();
+//    t.remove(25);
+//    t.display();
+//    t.remove(30);
+//    t.display();
+//    t.search(30);
+//    t.display();
     return 0;
 
 }
