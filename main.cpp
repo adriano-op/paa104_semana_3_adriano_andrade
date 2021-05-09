@@ -16,6 +16,7 @@ using namespace std;
 
 #include<map>
 
+//geeksforgeeks
 
 class binarySearhTree {
     struct node {
@@ -38,11 +39,12 @@ class binarySearhTree {
         return NULL;
     }
 //Inserção		caso médio: O(log n)	 pior caso: O(n)
-/**
-A inserção começa com uma busca, procurando pelo valor, mas se não for encontrado, procuram-se as subárvores da esquerda ou direita, como na busca.
- Eventualmente, alcança-se a folha, inserindo-se então o valor nesta posição. Ou seja, a raiz é examinada e introduz-se um nó novo na subárvore
- da esquerda se o valor novo for menor do que a raiz, ou na subárvore da direita se o valor novo for maior do que a raiz.
- */
+// A função recebe uma árvore de busca r
+// e uma folha avulsa novo e insere a folha
+// na árvore de modo que a árvore continue
+// sendo de busca. A função devolve a raiz
+// da árvore resultante.
+
     node *insert(int no, node *tree) {
         if (tree == NULL) // se a arvore é vazia
         {
@@ -196,14 +198,12 @@ int binarySearch(std::vector<T> v, int K) {
 // É um algoritmo O (n²) nos piores casos e no médio, mas é cerca de duas vezes mais rápido em média do que no pior caso.
 // A vantagem notável do algoritmo é um bom desempenho em matrizes quase classificadas..
 template<class T>
-vector<T> insertSort(std::vector<T> &v) {
-    vector<T> vetor(v.size());
-    vetor = v;
-    for (int i = 0; i < (int) vetor.size(); i++) {
+vector<T> insertSort(std::vector<T> &vetor) {
+    for (int i = 1; i < vetor.size(); i++) {
         int v = vetor[i];
         int j = i - 1;
-        while (j >= 0 && vetor[j] > v) { // operação básica
-            vetor[j + 1] = vetor[j];
+        while (j >= 0 && vetor[j] > v ) { // operação básica
+            swap(vetor[j], vetor[j+1]);
             j = j - 1;
         }
         vetor[j + 1] = v;
@@ -599,23 +599,23 @@ int lomutoPartition(int *array, int l, int r) {
 int quickSelect(int *array, int l, int r, int k) {
     // Se k for menor que o número de elementos na array
 
-        // Particionar o array em torno do último
-        // elemento e obter a posição do pivô
-        // elemento na array classificada
-        int index = lomutoPartition(array, l, r);
+    // Particionar o array em torno do último
+    // elemento e obter a posição do pivô
+    // elemento na array classificada
+    int index = lomutoPartition(array, l, r);
 
-        // Se a posição for igual a k, retorna o elemento
-        if (index - l == k - 1)
-            return array[index];
+    // Se a posição for igual a k, retorna o elemento
+    if (index - l == k - 1)
+        return array[index];
 
-        // Se a posição for maior, volte a ocorrer
-        // para subarray esquerdo
-        if (index - l > k - 1)
-            return quickSelect(array, l, index - 1, k);
+    // Se a posição for maior, volte a ocorrer
+    // para subarray esquerdo
+    if (index - l > k - 1)
+        return quickSelect(array, l, index - 1, k);
 
-        // Caso contrário, recorre para o subarray direito
-        return quickSelect(array, index + 1, r,
-                           k - index + l - 1);
+    // Caso contrário, recorre para o subarray direito
+    return quickSelect(array, index + 1, r,
+                       k - index + l - 1);
 }
 
 void print_subsets(const std::vector<std::vector<int>> &power_set) {
@@ -823,6 +823,7 @@ int pesaMoeda(std::vector<int> listaEsquerda, std::vector<int> listaDireita) {
 // C(n) = (n/2) + 1 (numero de operação basica 'pesagem'   c(1)= 0
 // n= 3
 //C(n) = (n/3) + 3 (numero de operação basica 'pesagem'   c(1)= 0.  O(log3 n)
+//findCoin
 int procuraMoeda(std::vector<int> &coins) {
     if (coins.size() == 0) {
         cout << "Balança vazia " << endl;
@@ -895,16 +896,16 @@ int main() {
     O funcionamento do algoritmo é bem simples: consiste em cada passo a partir do segundo elemento selecionar o próximo item
      da sequência e colocá-lo no local apropriado de acordo com o critério de ordenação.
     */
-//    int tam_v=20;
-//    std::vector<int> nums;
-//    std::vector<int> numsV = inicializaVectorRandom(tam_v);
-//
-//    cout << "Vector antes da ordenação: \n";
-//    printVector(numsV);
-//
-//    cout << "Vector depois da ordenação: \n";
-//    numsV=insertSort(nums);
-//    printVector(numsV );
+    int tam_v=20;
+
+    std::vector<int> numsV = inicializaVectorRandom(tam_v);
+
+    cout << "Vector antes da ordenação: \n";
+    printVector(numsV);
+
+    cout << "Vector depois da ordenação: \n";
+    numsV=insertSort(numsV);
+    printVector(numsV );
 
 
 
@@ -1076,12 +1077,12 @@ int main() {
 //-------------------------------------------- mediana -----------------------------------------------------------------
 //-------------------------------------------- mediana -----------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-    int array[] = {4, 1, 10, 8, 7, 12, 9, 2, 15};
-    int n = sizeof(array) / sizeof(array[0]);
-    int k = ceil(n / 2);
-    cout << "K: " << k << endl;
-    cout << "K-th elemento:  "
-         << quickSelect(array, 0, n - 1, k);
+//    int array[] = {4, 1, 10, 8, 7, 12, 9, 2, 15};
+//    int n = sizeof(array) / sizeof(array[0]);
+//    int k = ceil(n / 2);
+//    cout << "K: " << k << endl;
+//    cout << "K-th elemento:  "
+//         << quickSelect(array, 0, n - 1, k);
 
 
 
