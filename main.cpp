@@ -16,134 +16,12 @@ using namespace std;
 
 #include<map>
 
-//geeksforgeeks
-
-class binarySearhTree {
-    struct node {
-        int data;
-        node *left;
-        node *right;
-    };
-
-    node *root;
-
-    // deleta a arvore
-    node *raizVazia(node *t) {
-        if (t == NULL)
-            return NULL;
-        {
-            raizVazia(t->left);
-            raizVazia(t->right);
-            delete t;
-        }
-        return NULL;
-    }
-//Inserção		caso médio: O(log n)	 pior caso: O(n)
-// A função recebe uma árvore de busca r
-// e uma folha avulsa novo e insere a folha
-// na árvore de modo que a árvore continue
-// sendo de busca. A função devolve a raiz
-// da árvore resultante.
-
-    node *insert(int no, node *tree) {
-        if (tree == NULL) // se a arvore é vazia
-        {
-            tree = new node; // cria um nó e insere. se não
-            tree->data = no;
-            tree->left = tree->right = NULL;
-        } else if (no < tree->data) // faz as comparações
-            tree->left = insert(no, tree->left);
-        else if (no > tree->data)
-            tree->right = insert(no, tree->right);
-        return tree;
-    }
-
-    node *findMin(node *t) {
-        if (t == NULL)
-            return NULL;
-        else if (t->left == NULL)
-            return t;
-        else
-            return findMin(t->left);
-    }
-
-    node *findMax(node *tree) {
-        if (tree == NULL)
-            return NULL;
-        else if (tree->right == NULL)
-            return tree;
-        else
-            return findMax(tree->right);
-    }
-
-//caso médio: O(log n)	 pior caso: O(n)
-    node *remove(int x, node *tree) {
-        node *temp;
-        if (tree == NULL)
-            return NULL;
-        else if (x < tree->data)
-            tree->left = remove(x, tree->left);
-        else if (x > tree->data)
-            tree->right = remove(x, tree->right);
-        else if (tree->left && tree->right) {
-            temp = findMin(tree->right);
-            tree->data = temp->data;
-            tree->right = remove(tree->data, tree->right);
-        } else {
-            temp = tree;
-            if (tree->left == NULL)
-                tree = tree->right;
-            else if (tree->right == NULL)
-                tree = tree->left;
-            delete temp;
-        }
-
-        return tree;
-    }
-
-    // imprime em ordem crescente
-    void inorder(node *t) {
-        if (t == NULL)
-            return;
-        inorder(t->left);
-        cout << t->data << " ";
-        inorder(t->right);
-    }
-
-    //caso médio: O(log n)	 pior caso: O(n)
-    node *find(node *t, int x) {
-        if (t == NULL)
-            return NULL;
-        else if (x < t->data)
-            return find(t->left, x);
-        else if (x > t->data)
-            return find(t->right, x);
-        else
-            return t;
-    }
-
+class node {
 public:
-    binarySearhTree() {
-        root = NULL;
-    }
-
-    ~binarySearhTree() {
-        root = raizVazia(root);
-    }
-
-    void insert(int x) {
-        root = insert(x, root);
-    }
-
-    void remove(int x) {
-        root = remove(x, root);
-    }
-
-    void display() {
-        inorder(root);
-        cout << endl;
-    }
-
+    int elemnto;
+    node *left;
+    node *right;
+};
 /*
   A busca começa examinando o nó raiz. Se a árvore está vazia, o valor procurado não pode existir na árvore.
   Caso contrário, se o valor é igual a raiz, a busca foi bem sucedida.
@@ -152,10 +30,57 @@ public:
   Esse processo é repetido até o valor ser encontrado ou a subárvore ser nula (vazia).
   Se o valor não for encontrado até a busca chegar na subárvore nula, então o valor não deve estar presente na árvore.
  */
-    void search(int x) {
-        root = find(root, x);
+//caso médio: O(log n)	 pior caso: O(n)
+node *busca(node *t, int x) {
+    if (t == NULL)
+        return NULL;
+    else if (x < t->elemnto)
+        return busca(t->left, x);
+    else if (x > t->elemnto)
+        return busca(t->right, x);
+    else
+        return t;
+
+}
+/*
+  A busca começa examinando o nó raiz. Se a árvore está vazia, o valor procurado não pode existir na árvore.
+  Caso contrário, se o valor é igual a raiz, a busca foi bem sucedida.
+  Se o valor é menor do que a raiz, a busca segue pela subárvore esquerda, se não, pela direita.
+
+  Esse processo é repetido até o valor ser encontrado ou a subárvore ser nula (vazia).
+  Se o valor não for encontrado até a busca chegar na subárvore nula, então o valor não deve estar presente na árvore.
+ */
+
+
+void inorder(node *root) {
+    if (root == NULL)
+        return;
+    else {
+        inorder(root->left);
+        cout << root->elemnto << " ";
+        inorder(root->right);
     }
-};
+
+}
+//Inserção		caso médio: O(log n)	 pior caso: O(n)
+// A função recebe uma árvore de busca r
+// e uma folha avulsa novo e insere a folha
+// na árvore de modo que a árvore continue
+// sendo de busca. A função devolve a raiz
+// da árvore resultante.
+
+node *insert(int elemento, node *t) {
+    if (t == NULL) // se a arvore é vazia
+    {
+        t = new node; // cria um nó e insere. se não
+        t->elemnto = elemento;
+        t->left = t->right = NULL;
+    } else if (elemento < t->elemnto) // faz as comparações
+        t->left = insert(elemento, t->left);
+    else if (elemento > t->elemnto)
+        t->right = insert(elemento, t->right);
+    return t;
+}
 
 
 template<class T>
@@ -896,16 +821,16 @@ int main() {
     O funcionamento do algoritmo é bem simples: consiste em cada passo a partir do segundo elemento selecionar o próximo item
      da sequência e colocá-lo no local apropriado de acordo com o critério de ordenação.
     */
-    int tam_v=20;
-
-    std::vector<int> numsV = inicializaVectorRandom(tam_v);
-
-    cout << "Vector antes da ordenação: \n";
-    printVector(numsV);
-
-    cout << "Vector depois da ordenação: \n";
-    numsV=insertSort(numsV);
-    printVector(numsV );
+//    int tam_v=20;
+//
+//    std::vector<int> numsV = inicializaVectorRandom(tam_v);
+//
+//    cout << "Vector antes da ordenação: \n";
+//    printVector(numsV);
+//
+//    cout << "Vector depois da ordenação: \n";
+//    numsV=insertSort(numsV);
+//    printVector(numsV );
 
 
 
@@ -1091,26 +1016,42 @@ int main() {
 // 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 // --------------------------------------- binary search tree ---------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
-//altura log2 n, pioraso O(n)
-//    binarySearhTree t;
-//    t.insert(20);
-//    t.insert(25);
-//    t.insert(24);
-//    t.insert(27);
-//    t.insert(29);
-//    t.insert(15);
-//    t.insert(10);
-//    t.insert(11);
-//    t.insert(30);
-//    t.display();
-//    t.remove(20);
-//    t.display();
-//    t.remove(25);
-//    t.display();
-//    t.remove(30);
-//    t.display();
-//    t.search(30);
-//    t.display();
+
+    node *root = NULL;
+    cout << "Inserção: " << endl;
+
+     root = insert(6, root);
+    cout << 6 <<  " ";
+    insert(3, root);
+    cout <<  3 <<  " ";
+    insert(30, root);
+    cout << 30 <<  " ";
+    insert(7, root);
+    cout << 7 <<  " ";
+    insert(1, root);
+    cout << 1  <<  " ";
+    insert(5, root);
+    cout << 5 <<  " ";
+    insert(2, root);
+    cout << 2 <<  " ";
+    insert(20, root);
+    cout << 20 <<  " ";
+    insert(40, root);
+    cout <<  40 <<  " ";
+    insert(70, root);
+    cout << 70 <<  " ";
+    insert(60, root);
+    cout <<  60 <<  " ";
+    insert(80, root);
+    cout << 80 <<  endl;
+
+    cout << "Árvore " << endl;
+    inorder(root);
+    cout << endl;
+
+    cout << "Busca: " ;
+    root = busca(root, 30);
+    cout << root->elemnto;
     return 0;
 
 }
