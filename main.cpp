@@ -821,16 +821,16 @@ int main() {
     O funcionamento do algoritmo é bem simples: consiste em cada passo a partir do segundo elemento selecionar o próximo item
      da sequência e colocá-lo no local apropriado de acordo com o critério de ordenação.
     */
-//    int tam_v=20;
-//
-//    std::vector<int> numsV = inicializaVectorRandom(tam_v);
-//
-//    cout << "Vector antes da ordenação: \n";
-//    printVector(numsV);
-//
-//    cout << "Vector depois da ordenação: \n";
-//    numsV=insertSort(numsV);
-//    printVector(numsV );
+    int tam_v=20;
+
+    std::vector<int> numsV = inicializaVectorRandom(tam_v);
+
+    cout << "Vector antes da ordenação: \n";
+    printVector(numsV);
+
+    cout << "Vector depois da ordenação: \n";
+    numsV=insertSort(numsV);
+    printVector(numsV );
 
 
 
@@ -1017,41 +1017,41 @@ int main() {
 // --------------------------------------- binary search tree ---------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
 
-    node *root = NULL;
-    cout << "Inserção: " << endl;
-
-     root = insert(6, root);
-    cout << 6 <<  " ";
-    insert(3, root);
-    cout <<  3 <<  " ";
-    insert(30, root);
-    cout << 30 <<  " ";
-    insert(7, root);
-    cout << 7 <<  " ";
-    insert(1, root);
-    cout << 1  <<  " ";
-    insert(5, root);
-    cout << 5 <<  " ";
-    insert(2, root);
-    cout << 2 <<  " ";
-    insert(20, root);
-    cout << 20 <<  " ";
-    insert(40, root);
-    cout <<  40 <<  " ";
-    insert(70, root);
-    cout << 70 <<  " ";
-    insert(60, root);
-    cout <<  60 <<  " ";
-    insert(80, root);
-    cout << 80 <<  endl;
-
-    cout << "Árvore " << endl;
-    inorder(root);
-    cout << endl;
-
-    cout << "Busca: " ;
-    root = busca(root, 30);
-    cout << root->elemnto;
+//    node *root = NULL;
+//    cout << "Inserção: " << endl;
+//
+//     root = insert(6, root);
+//    cout << 6 <<  " ";
+//    insert(3, root);
+//    cout <<  3 <<  " ";
+//    insert(30, root);
+//    cout << 30 <<  " ";
+//    insert(7, root);
+//    cout << 7 <<  " ";
+//    insert(1, root);
+//    cout << 1  <<  " ";
+//    insert(5, root);
+//    cout << 5 <<  " ";
+//    insert(2, root);
+//    cout << 2 <<  " ";
+//    insert(20, root);
+//    cout << 20 <<  " ";
+//    insert(40, root);
+//    cout <<  40 <<  " ";
+//    insert(70, root);
+//    cout << 70 <<  " ";
+//    insert(60, root);
+//    cout <<  60 <<  " ";
+//    insert(80, root);
+//    cout << 80 <<  endl;
+//
+//    cout << "Árvore " << endl;
+//    inorder(root);
+//    cout << endl;
+//
+//    cout << "Busca: " ;
+//    root = busca(root, 30);
+//    cout << root->elemnto;
     return 0;
 
 }
