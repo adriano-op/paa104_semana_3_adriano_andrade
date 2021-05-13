@@ -42,6 +42,7 @@ node *busca(node *t, int x) {
         return t;
 
 }
+
 /*
   A busca começa examinando o nó raiz. Se a árvore está vazia, o valor procurado não pode existir na árvore.
   Caso contrário, se o valor é igual a raiz, a busca foi bem sucedida.
@@ -127,8 +128,8 @@ vector<T> insertSort(std::vector<T> &vetor) {
     for (int i = 1; i < vetor.size(); i++) {
         int v = vetor[i];
         int j = i - 1;
-        while (j >= 0 && vetor[j] > v ) { // operação básica
-            swap(vetor[j], vetor[j+1]);
+        while (j >= 0 && vetor[j] > v) { // operação básica
+            swap(vetor[j], vetor[j + 1]);
             j = j - 1;
         }
         vetor[j + 1] = v;
@@ -409,7 +410,17 @@ std::vector<std::vector<int>> lexic_permute(int n) {
 // ------------------------------ johnTrotter ------------------------------------------------------------------------
 // ------------------------------ johnTrotter ------------------------------------------------------------------------
 
-//  O( n!)
+//Algoritmo de Johnson e Trotter - Tem bom desempenho gera todas as permutações de troca mínima:
+//    A partir de uma permutação, apenas dois elementos são
+//    trocados de lugar (i. e., transpostos) para gerar a próxima
+//    permutação.
+//    O algoritmo não requer armazenar todas as permutações
+//    de tamanho n-1 e não requer passar por todas as permutações mais curtas.
+//    Em vez disso, ele acompanha a
+//    direção de cada elemento da permutação.
+//    Logo, a complexidade média (de transposições) é
+//  O( n!).
+// by geeksforgeeks
 std::vector<vector<int>> johnTrotter(std::vector<int> &array, bool *direcao, int k, std::vector<vector<int>> mv) {
     for (int i = 1; i < k; i++) {
         int n = array.size();
@@ -436,8 +447,7 @@ std::vector<vector<int>> johnTrotter(std::vector<int> &array, bool *direcao, int
             }
         }
 
-
-        // swap k with the adjacent element k’s arrow points to
+        // trocar k com o elemento  adjacente a
         // trocando os elementos de acordo com array direção, ou seja, direcao [].
         if (direcao[array[pegaPosicaoMaiorMovel - 1] - 1] == false) {
             swap(array[pegaPosicaoMaiorMovel - 1], array[pegaPosicaoMaiorMovel - 2]);
@@ -449,7 +459,7 @@ std::vector<vector<int>> johnTrotter(std::vector<int> &array, bool *direcao, int
         // alterando as direções dos elementos maior que o maior número inteiro móvel.
         for (int i = 0; i < n; i++) {
             if (array[i] > maiorMovel) {
-                //reverse the direction of all the elements that are larger than
+                // inverter a direção de todos os elementos maiores
                 if (direcao[array[i] - 1] == true)
                     direcao[array[i] - 1] = false;
                 else if (direcao[array[i] - 1] == false)
@@ -479,11 +489,11 @@ int factorial(int n) {
 
 void inicializaJohn(int n) {
 
-    std::vector<int> v;
+    std::vector<int> v; // vetor base
     std::vector<vector<int>> mv;
     bool direcao[n];
 
-    int k = factorial(n); // O(n!)
+    int k = factorial(n); //  k-> numero execuções da função prinipal
     cout << "Número de permutação: " << k << endl;
 
     for (int i = 0; i < n; i++) {
@@ -493,11 +503,12 @@ void inicializaJohn(int n) {
 
     cout << endl;
 
+    //inicializa vetor de bool =false
     for (int i = 0; i < n; i++) {
         direcao[i] = false;
     }
 
-    mv.push_back(v);
+    mv.push_back(v);//
     johnTrotter(v, direcao, k, mv);
 }
 
@@ -566,8 +577,8 @@ void print_bit_strings(std::vector<std::vector<int>> &power_set) {
 }
 
 /*
- The correctness of the algorithm stems from the fact that it generates 2^n bit strings and all of them are distinct.
- Both these assertions are easy to check by mathematical induction.
+A exatidão do algoritmo decorre do fato de que ele gera sequências de 2 ^ n bits e todas elas são distintas.
+  Ambas as afirmações são fáceis de verificar por indução matemática.
  */
 std::vector<std::vector<int>> BRGC_Recursivo(int n) {
     std::vector<std::vector<int>> power_set;
@@ -594,18 +605,21 @@ std::vector<std::vector<int>> BRGC_Recursivo(int n) {
     return power_set;
 
 }
-
+//A abordagem de busca exaustiva para resolver esse problema discutido foi baseada na geração de todos os subconjuntos
+// de um determinado conjunto de itens. Nesta seção, discutimos algoritmos para gerar todos os 2 subconjuntos de um
+// conjunto abstrato A = {a1, ..., an}.
+//A exatidão do algoritmo decorre do fato de que ele gera sequências de 2^n bits e todas são distintas.
 std::vector<string> BRGC(int n) {
     vector<string> ans;
-    ans.push_back("0");
+    ans.push_back("0"); //if n = 1 retorna a lista L contendo cadeias de bits 0 e 1 nesta ordem
     ans.push_back("1");
     vector<string> temp;
     for (int i = 2; i <= n; ++i) {
         for (auto x: ans) {
-            temp.push_back(x + "0");
-            temp.push_back(x + "1");
+            temp.push_back(x + "0"); // adicione 0 na frente de cada string de bits na lista L1
+            temp.push_back(x + "1"); //adicione 1 na frente de cada string de bits na lista L2
         }
-        ans = temp;
+        ans = temp; //anexe L2 a L1 para obter a lista
         temp.clear();
     }
     return ans;
@@ -821,16 +835,16 @@ int main() {
     O funcionamento do algoritmo é bem simples: consiste em cada passo a partir do segundo elemento selecionar o próximo item
      da sequência e colocá-lo no local apropriado de acordo com o critério de ordenação.
     */
-    int tam_v=20;
-
-    std::vector<int> numsV = inicializaVectorRandom(tam_v);
-
-    cout << "Vector antes da ordenação: \n";
-    printVector(numsV);
-
-    cout << "Vector depois da ordenação: \n";
-    numsV=insertSort(numsV);
-    printVector(numsV );
+//    int tam_v=20;
+//
+//    std::vector<int> numsV = inicializaVectorRandom(tam_v);
+//
+//    cout << "Vector antes da ordenação: \n";
+//    printVector(numsV);
+//
+//    cout << "Vector depois da ordenação: \n";
+//    numsV=insertSort(numsV);
+//    printVector(numsV );
 
 
 
@@ -886,11 +900,13 @@ int main() {
     // -----------------------------------------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
 
-    //  std::vector<std::vector<int>> power_set = BRGC_Recursivo(2);
+    //Implemente um algoritmo que, dado um conjunto de elementos, gere todos seus subconjuntos
+    // code gray
 
-//     print_bit_strings(power_set);
-
-    //  print_subsets(power_set);
+   // std::vector<std::vector<int>> power_set = BRGC_Recursivo(2);
+    std::vector<string> power_set = BRGC(1);
+    printVector(power_set);
+   // print_subsets(power_set);
 
 
 // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
@@ -1017,41 +1033,25 @@ int main() {
 // --------------------------------------- binary search tree ---------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------
 
+
 //    node *root = NULL;
 //    cout << "Inserção: " << endl;
+//    int v[] = {6, 2, 3, 4, 5, 6, 7, 8, 30, 1};
 //
-//     root = insert(6, root);
-//    cout << 6 <<  " ";
-//    insert(3, root);
-//    cout <<  3 <<  " ";
-//    insert(30, root);
-//    cout << 30 <<  " ";
-//    insert(7, root);
-//    cout << 7 <<  " ";
-//    insert(1, root);
-//    cout << 1  <<  " ";
-//    insert(5, root);
-//    cout << 5 <<  " ";
-//    insert(2, root);
-//    cout << 2 <<  " ";
-//    insert(20, root);
-//    cout << 20 <<  " ";
-//    insert(40, root);
-//    cout <<  40 <<  " ";
-//    insert(70, root);
-//    cout << 70 <<  " ";
-//    insert(60, root);
-//    cout <<  60 <<  " ";
-//    insert(80, root);
-//    cout << 80 <<  endl;
+//    for (int a :v) {
+//        root = insert(a, root);
+//        cout << a << " ";
+//    }
+//    cout << endl;
+// //   cout << "Árvore inorder" << endl;
 //
-//    cout << "Árvore " << endl;
-//    inorder(root);
+// //   inorder(root);
 //    cout << endl;
 //
 //    cout << "Busca: " ;
 //    root = busca(root, 30);
 //    cout << root->elemnto;
+
     return 0;
 
 }
