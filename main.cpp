@@ -532,6 +532,7 @@ int lomutoPartition(int *array, int l, int r) {
 // melhor caso: teta - Θ(n) - se for para ordenar  + O(nlog n)
 // pior   caso:  Θ(n^2)
 //pior caso : só acontece se estiver ordenado de forma decrescente
+//livro
 int quickSelect(int *array, int l, int r, int k) {
     // Se k for menor que o número de elementos na array
 
@@ -609,6 +610,7 @@ std::vector<std::vector<int>> BRGC_Recursivo(int n) {
 // de um determinado conjunto de itens. Nesta seção, discutimos algoritmos para gerar todos os 2 subconjuntos de um
 // conjunto abstrato A = {a1, ..., an}.
 //A exatidão do algoritmo decorre do fato de que ele gera sequências de 2^n bits e todas são distintas.
+//livro
 std::vector<string> BRGC(int n) {
     vector<string> ans;
     ans.push_back("0"); //if n = 1 retorna a lista L contendo cadeias de bits 0 e 1 nesta ordem
@@ -722,7 +724,7 @@ int fake_coin_detector(const std::vector<int> &coins, int begin, int end) {
     return fake_coin;
 }
 
-// compara o peso da balança e retorna o conunto mais leve.
+// compara o peso da balança e retorna o conjunto mais leve.
 // executado n/2
 int pesaMoeda(std::vector<int> listaEsquerda, std::vector<int> listaDireita) {
     if (listaEsquerda.size() != listaDireita.size())
@@ -755,12 +757,12 @@ int pesaMoeda(std::vector<int> listaEsquerda, std::vector<int> listaDireita) {
 // Operação básica: divisão
 //
 // Eficiência: O(log2 n) de n no pior caso e base logarítmica 3 de n para a melhor eficiência
-//
 // Melhor caso: se n = 2
 //
 // Pior caso: n = número realmente grande
 // C(n) = (n/2) + 1 (numero de operação basica 'pesagem'   c(1)= 0
 // n= 3
+
 //C(n) = (n/3) + 3 (numero de operação basica 'pesagem'   c(1)= 0.  O(log3 n)
 //findCoin
 int procuraMoeda(std::vector<int> &coins) {
